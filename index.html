@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +10,36 @@
 </head>
 
 <body>
-    <img src="#" alt="image" srcset="">
+    <h1>Gif loader</h1>
+    <div>
+        <img src="#" alt="image" srcset="">
+    </div>
     <button id="refresh">Get new GIF</button>
 
+    <br>
     <label for="search">Search GIFs</label>
-    <input type="text" id="search" required>
+    <input type="text" id="search">
     <button id="search_btn">Search</button>
 
     <script defer>
+        let default_value = 'dogs';
         const image = document.querySelector('img');
         const button = document.getElementById('refresh');
         const search_value = document.getElementById('search');
         const search_button = document.getElementById('search_btn');
 
         search_button.addEventListener('click', (e) => {
-            getGif(search_value.value)
+            default_value = search_value.value;
+            getGif()
         })
 
         button.addEventListener('click', (e) => {
             getGif()
         });
 
-        function getGif(term = 'dogs') {
-            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=ltxvQNzFIyrUTUjuNoasv3Kid62sAN2W&s=${term}`, { mode: 'cors' })
+        function getGif() {
+            console.log(default_value)
+            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=ltxvQNzFIyrUTUjuNoasv3Kid62sAN2W&s=${default_value}`, { mode: 'cors' })
                 .then(function (response) {
                     return response.json();
                 })
